@@ -5,14 +5,12 @@ var server = http.createServer(function(request,response){
   var ourURL = url.parse(request.url, true),
         time = new Date(ourURL.query.iso),
         ourResult
-  if(ourURL.iso){
-   ourResult = {
-    "hour": time.getHours(),
-    "minute": time.getMinutes(),
-    "second": time.getSeconds()
-   }
-  } else if (ourURL.unixtime) {
-    ourResult = time.getTime()
+        console.log(ourURL)
+
+  if(/^\/api\/parsetime/.test(request.url)){
+   ourResult = parseTime(time,response)
+  } else if (/^\/api\/unixtime/.test(request.url)){
+    ourResult = unixTime(time,response)
   }
   if (ourResult) {
     response.writeHead(200, { 'Content-Type': 'application/json' })
@@ -26,15 +24,19 @@ server.listen(process.argv[2])
 
 
 //functions for parsetime and unixtime.
-//if iso, ourResult = parsetime
-//if unixtime, ourResult = unixtime
+parseTime = function(time){
+  return {
+  hour: time.getHours(),
+  minute: time.getMinutes(),
+  second: time.getSeconds()
+  }
+}
 
-
-
-
-
-// The JavaScript Date object can print dates in ISO format, e.g. new Date().toISOString(). It can also parse this format if you pass the string into the Date constructor. Date#getTime() will also come in handy.
-
+unixTime = function(time){
+  return {
+    unixtime: time.getTime()
+  }
+}
 
 
 
