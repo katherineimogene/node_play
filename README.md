@@ -25,7 +25,7 @@ The programs in this directory are named to appropriately match the learnyounode
 [Learn how to compose streaming interfaces with .pipe()](http://nodeschool.io/#stream-adventure)
 
 ##### Installation/Use
-1. Install learn you node ```:> npm install -g stream-adventure```
+1. Install stream adventure ```:> npm install -g stream-adventure```
 2. Run ```:> stream-adventure``` to get started
 3. Have fun!
 
